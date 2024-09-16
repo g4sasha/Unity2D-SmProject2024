@@ -1,4 +1,4 @@
 public enum DeathTypes
 {
-	Default
+	OnlyDestroy
 }

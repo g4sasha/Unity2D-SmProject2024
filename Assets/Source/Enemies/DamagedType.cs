@@ -1,5 +1,5 @@
 public enum DamageType
 {
-	DefaultWithLogging,
+	DamageWithLogging,
 	OnlyDamage
 }

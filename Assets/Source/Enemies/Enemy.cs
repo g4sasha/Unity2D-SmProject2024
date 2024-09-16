@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
 
             switch (_properties.DamageType)
             {
-                case DamageType.DefaultWithLogging:
+                case DamageType.DamageWithLogging:
                     Debug.Log($"{_properties.Name} was damaged! {_currentHealth} -> {_currentHealth - damage}"); // TODO: damage animation
                     TakeDamage(damage);
                     break;
@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
 		{
             switch (_properties.AttackType)
             {
-                case AttackTypes.ConsoleWrite:
+                case AttackTypes.ConsoleLog:
 					Debug.Log("Player hit"); 
                     break;
             }
@@ -79,7 +79,7 @@ public class Enemy : MonoBehaviour
 		{
             switch (_properties.DeathType)
             {
-                case DeathTypes.Default:
+                case DeathTypes.OnlyDestroy:
 					Destroy(gameObject);
                     break;
             }
