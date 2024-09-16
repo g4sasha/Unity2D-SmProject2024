@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eefc296eeeee63b41921c7b6d7d431dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Rb>k__BackingField: {fileID: 8841744643199852898}
   _properties: {fileID: 11400000, guid: 4b141042ef1529845a320135abd7cd9a, type: 2}
   _playerLayer:
     serializedVersion: 2
@@ -114,7 +115,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3797253123259094863}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
