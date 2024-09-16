@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Rb>k__BackingField: {fileID: 8841744643199852898}
-  _properties: {fileID: 11400000, guid: 4b141042ef1529845a320135abd7cd9a, type: 2}
+  _properties: {fileID: 0}
   _playerLayer:
     serializedVersion: 2
     m_Bits: 8
