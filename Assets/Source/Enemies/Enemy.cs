@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour
             switch (_properties.AttackType)
             {
                 case AttackTypes.ConsoleLog:
-					Debug.Log("Player hit"); 
+					Debug.Log("Player damaged"); 
                     break;
             }
             

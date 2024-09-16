@@ -29,3 +29,4 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 0}
   <DeathType>k__BackingField: 0
   <AttackType>k__BackingField: 0
+  <DamageType>k__BackingField: 1
