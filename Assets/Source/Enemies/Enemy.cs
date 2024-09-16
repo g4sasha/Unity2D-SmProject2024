@@ -7,11 +7,10 @@ public class Enemy : MonoBehaviour
 	[SerializeField] private EnemyProperty _properties;
 	[SerializeField] private LayerMask _playerLayer;
 	[SerializeField] private LayerMask _bulletLayer;
-	[SerializeField] private Player _player;
 	private float _currentHealth;
 	private float _cooldown;
 	private bool _readyToAttack;
-	private EnemyMovement _enemyMovement;
+	private RigidbodyMovement2D _enemyMovement;
 
 	private void OnValidate()
 	{
@@ -21,7 +20,7 @@ public class Enemy : MonoBehaviour
 	private void Awake()
 	{
 		_currentHealth = _properties.MaxHealth;
-		_enemyMovement = new EnemyMovement();
+		_enemyMovement = new RigidbodyMovement2D();
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)
@@ -30,27 +29,27 @@ public class Enemy : MonoBehaviour
 		{
 			var damage = other.GetComponent<Bullet>().Damage; // TODO: not use GetComponent
 
-            switch (_properties.DamageType)
+            switch (_properties.DamageType) // Damage type switch
             {
-                case DamageType.DamageWithLogging:
+                case DamageTypes.DamageWithLogging:
                     Debug.Log($"{_properties.Name} was damaged! {_currentHealth} -> {_currentHealth - damage}"); // NOTE: do not move down!
                     TakeDamage(damage);
                     break;
-                case DamageType.OnlyDamage:
+                case DamageTypes.OnlyDamage:
 					TakeDamage(damage);
                     break;
             }
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnCollisionStay2D(Collision2D collision)
 	{
-		if ((_playerLayer & 1 << other.gameObject.layer) != 0 && _readyToAttack)
+		if ((_playerLayer & 1 << collision.gameObject.layer) != 0 && _readyToAttack)
 		{
-            switch (_properties.AttackType)
+            switch (_properties.AttackType) // Attack type switch
             {
                 case AttackTypes.ConsoleLog:
-					Debug.Log("Player damaged"); 
+					Debug.Log("Player damaged");
                     break;
             }
             
@@ -61,7 +60,6 @@ public class Enemy : MonoBehaviour
     private void Update()
 	{
 		UpdateCooldown();
-		Move();
 	}
 
     public void TakeDamage(float damage)
@@ -80,11 +78,23 @@ public class Enemy : MonoBehaviour
 		}
     }
 
+	public void Move(Transform target)
+	{
+		Vector2 direction = (target.position - transform.position).normalized;
+
+        switch (_properties.MoveType) // Move type switch
+        {
+            case MoveTypes.OnlyMaxSpeed:
+				_enemyMovement.Move(Rb, direction, _properties.MaxSpeed);
+                break;
+        }
+    }
+
 	private void CheckDeath()
 	{
 		if (_currentHealth <= 0f)
 		{
-            switch (_properties.DeathType)
+            switch (_properties.DeathType) // Death type switch
             {
                 case DeathTypes.OnlyDestroy:
 					Destroy(gameObject);
@@ -105,11 +115,5 @@ public class Enemy : MonoBehaviour
 			_cooldown -= Time.deltaTime;
 			_readyToAttack = false;
 		}
-	}
-
-	private void Move()
-	{
-		Vector2 direction = (_player.transform.position - transform.position).normalized;
-		_enemyMovement.Move(this, direction, _properties.MaxSpeed);
 	}
 }
