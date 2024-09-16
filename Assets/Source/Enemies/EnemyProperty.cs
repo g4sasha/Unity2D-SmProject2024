@@ -16,4 +16,5 @@ public class EnemyProperty : ScriptableObject
     [field: SerializeField] public AttackTypes AttackType { get; private set; }
     [field: SerializeField] public DamageTypes DamageType { get; private set; }
     [field: SerializeField] public MoveTypes MoveType { get; private set; }
+    [field: SerializeField] public GameObject Prefab { get; private set; }
 }

@@ -100,6 +100,8 @@ public class Enemy : MonoBehaviour
 					Destroy(gameObject);
                     break;
             }
+
+			EnemyNavigator.Instance.RemoveEnemy(this);
         }
     }
 
