@@ -1,17 +1,27 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour
 {
+	[field: SerializeField] public Rigidbody2D Rb { get; private set; }
 	[SerializeField] private EnemyProperty _properties;
 	[SerializeField] private LayerMask _playerLayer;
 	[SerializeField] private LayerMask _bulletLayer;
+	[SerializeField] private Player _player;
 	private float _currentHealth;
 	private float _cooldown;
 	private bool _readyToAttack;
+	private EnemyMovement _enemyMovement;
+
+	private void OnValidate()
+	{
+		Rb = GetComponent<Rigidbody2D>();
+	}
 
 	private void Awake()
 	{
 		_currentHealth = _properties.MaxHealth;
+		_enemyMovement = new EnemyMovement();
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)
@@ -50,16 +60,8 @@ public class Enemy : MonoBehaviour
 
     private void Update()
 	{
-		if (_cooldown <= 0f)
-		{
-			_cooldown = 0f; // NOTE: always updated
-			_readyToAttack = true;
-		}
-		else
-		{
-			_cooldown -= Time.deltaTime;
-			_readyToAttack = false;
-		}
+		UpdateCooldown();
+		Move();
 	}
 
     public void TakeDamage(float damage)
@@ -68,9 +70,14 @@ public class Enemy : MonoBehaviour
 		CheckDeath();
     }
 
-    public void Heal(float heal)
+    public void Heal(float heal, bool logging = false) // NOTE: not in the TOR
     {
         _currentHealth += heal > 0f ? heal : 0f;
+
+		if (logging)
+		{
+			Debug.Log($"{_properties.Name} healed! {_currentHealth} -> {_currentHealth + heal}");
+		}
     }
 
 	private void CheckDeath()
@@ -85,4 +92,24 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+
+	private void UpdateCooldown()
+	{
+		if (_cooldown <= 0f)
+		{
+			_cooldown = 0f; // NOTE: always updated
+			_readyToAttack = true;
+		}
+		else
+		{
+			_cooldown -= Time.deltaTime;
+			_readyToAttack = false;
+		}
+	}
+
+	private void Move()
+	{
+		Vector2 direction = (_player.transform.position - transform.position).normalized;
+		_enemyMovement.Move(this, direction, _properties.MaxSpeed);
+	}
 }
