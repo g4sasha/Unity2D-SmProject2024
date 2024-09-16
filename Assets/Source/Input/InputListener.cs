@@ -1,8 +1,10 @@
+using System.Collections;
 using UnityEngine;
 
 public class InputListener : MonoBehaviour
 {
     [SerializeField] private Player _player;
+    private bool _readyToShoot = true;
 
     private void Update()
     {
@@ -14,9 +16,19 @@ public class InputListener : MonoBehaviour
 
     private void Shooting()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (!_readyToShoot) return;
+
+        if (Input.GetButton("Fire1"))
         {
             _player.BulletSpawner.Spawn(_player.transform.position, _player.Bullet, Input.mousePosition);
+            StartCoroutine(Cooldown());
         }
     }
+
+    private IEnumerator Cooldown()
+	{
+		_readyToShoot = false;
+		yield return new WaitForSeconds(_player.Bullet.Cooldown);
+		_readyToShoot = true;
+	}
 }
