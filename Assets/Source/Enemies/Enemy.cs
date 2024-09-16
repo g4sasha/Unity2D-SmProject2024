@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
             switch (_properties.DamageType)
             {
                 case DamageType.DamageWithLogging:
-                    Debug.Log($"{_properties.Name} was damaged! {_currentHealth} -> {_currentHealth - damage}"); // TODO: damage animation
+                    Debug.Log($"{_properties.Name} was damaged! {_currentHealth} -> {_currentHealth - damage}"); // NOTE: do not move down!
                     TakeDamage(damage);
                     break;
                 case DamageType.OnlyDamage:
