@@ -10,13 +10,13 @@ public class InputListener : MonoBehaviour
         Shooting();
     }
 
-    private void Movement() => _player.PlayerMovment.Move(_player, new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+    private void Movement() => _player.PlayerMovment.Move(_player.Rb, new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")), _player.Speed);
 
     private void Shooting()
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            _player.PlayerCombat.Shoot(_player, _player.Bullet, Input.mousePosition);
+            _player.BulletSpawner.Spawn(_player.transform.position, _player.Bullet, Input.mousePosition);
         }
     }
 }
