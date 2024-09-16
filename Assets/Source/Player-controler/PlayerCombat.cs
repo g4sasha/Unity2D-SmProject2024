@@ -1,15 +1,9 @@
 using UnityEngine;
 
-public class PlayerCombat : MonoBehaviour
+public class PlayerCombat
 {
-	[SerializeField] private Transform _player;
-	[SerializeField] private Bullet _bulletPrefab;
-
-	private void Update()
+	public void Shoot(Player player, Bullet bullet, Vector3 mousePosition)
 	{
-		if (Input.GetButtonDown("Fire1"))
-		{
-			Instantiate(_bulletPrefab, transform.position, Quaternion.identity).SetDirection((Input.mousePosition - Camera.main.WorldToScreenPoint(_player.position)).normalized);
-		}
+		GameObject.Instantiate(bullet, player.transform.position, Quaternion.identity).SetDirection((mousePosition - Camera.main.WorldToScreenPoint(player.transform.position)).normalized);
 	}
 }
