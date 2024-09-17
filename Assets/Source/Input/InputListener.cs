@@ -20,7 +20,7 @@ public class InputListener : MonoBehaviour
 
         if (Input.GetButton("Fire1"))
         {
-            _player.BulletSpawner.Spawn(_player.transform.position, _player.Bullet, Input.mousePosition);
+            _player.BulletSpawner.Spawn(_player.transform.position, _player.Bullet.Prefab.GetComponent<Bullet>(), Input.mousePosition); // TODO: not use GetComponent
             StartCoroutine(Cooldown());
         }
     }

@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
 	{
 		if ((_bulletLayer & 1 << other.gameObject.layer) != 0)
 		{
-			var damage = other.GetComponent<Bullet>().Damage; // TODO: not use GetComponent
+			var damage = other.GetComponent<Bullet>().BulletType.Damage; // TODO: not use GetComponent
 			TakeDamage(damage);
         }
     }
