@@ -28,17 +28,7 @@ public class Enemy : MonoBehaviour
 		if ((_bulletLayer & 1 << other.gameObject.layer) != 0)
 		{
 			var damage = other.GetComponent<Bullet>().Damage; // TODO: not use GetComponent
-
-            switch (_properties.DamageType) // Damage type switch
-            {
-                case DamageTypes.DamageWithLogging:
-                    Debug.Log($"{_properties.Name} was damaged! {_currentHealth} -> {_currentHealth - damage}"); // NOTE: do not move down!
-                    TakeDamage(damage);
-                    break;
-                case DamageTypes.OnlyDamage:
-					TakeDamage(damage);
-                    break;
-            }
+			TakeDamage(damage);
         }
     }
 
@@ -56,7 +46,7 @@ public class Enemy : MonoBehaviour
                     break;
             }
 
-            _cooldown = _properties.AttackDelay;
+            _cooldown = _properties.AttackDelay; // Do update coldown
         }
     }
 
@@ -67,13 +57,27 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        _currentHealth -= damage > 0f ? damage : 0f;
-		CheckDeath();
+        switch (_properties.DamageType) // Damage type switch
+        {
+            case DamageTypes.DamageWithLogging:
+				Debug.Log($"{_properties.Name} took damage! {_currentHealth} -> {_currentHealth - damage}");
+				_currentHealth -= damage > 0f ? damage : 0f;
+                break;
+            case DamageTypes.OnlyDamage:
+				_currentHealth -= damage > 0f ? damage : 0f;
+                break;
+        }
+        CheckDeath();
     }
 
     public void Heal(float heal, bool logging = false) // NOTE: not in the TOR
     {
-        _currentHealth += heal > 0f ? heal : 0f;
+        switch (_properties.HealType) // Heal type switch
+        {
+            case HealTypes.OnlyHeal:
+				_currentHealth += heal > 0f ? heal : 0f;
+                break;
+        }
 
 		if (logging)
 		{
@@ -81,7 +85,7 @@ public class Enemy : MonoBehaviour
 		}
     }
 
-	public void Move(Transform target)
+    public void Move(Transform target)
 	{
 		Vector2 direction = (target.position - transform.position).normalized;
 
