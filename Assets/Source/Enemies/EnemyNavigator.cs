@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnemyNavigator : MonoBehaviour
 {
 	public static EnemyNavigator Instance { get; private set; }
+	[field: SerializeField] public HealthController PlayerHealth { get; private set; }
 	[SerializeField] private List<Enemy> _enemies;
 	[SerializeField] private Transform _target;
 

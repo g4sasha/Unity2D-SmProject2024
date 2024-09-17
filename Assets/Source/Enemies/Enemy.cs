@@ -49,11 +49,14 @@ public class Enemy : MonoBehaviour
             switch (_properties.AttackType) // Attack type switch
             {
                 case AttackTypes.ConsoleLog:
-					Debug.Log("Player damaged");
+                    Debug.Log("Player damaged");
+                    break;
+                case AttackTypes.OnlyMaxDamage:
+					EnemyNavigator.Instance.PlayerHealth.TakeDamage(_properties.MaxDamage);
                     break;
             }
-            
-			_cooldown = _properties.AttackDelay;
+
+            _cooldown = _properties.AttackDelay;
         }
     }
 

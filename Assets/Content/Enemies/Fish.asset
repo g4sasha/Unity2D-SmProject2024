@@ -28,7 +28,8 @@ MonoBehaviour:
   <BulletType>k__BackingField: {fileID: 0}
   <Sprite>k__BackingField: {fileID: 0}
   <DeathType>k__BackingField: 0
-  <AttackType>k__BackingField: 0
+  <AttackType>k__BackingField: 1
   <DamageType>k__BackingField: 1
   <MoveType>k__BackingField: 0
-  <Prefab>k__BackingField: {fileID: 5979143022634035761, guid: 48577bc70f0947840a454f4de0d36e0a, type: 3}
+  <Prefab>k__BackingField: {fileID: 5979143022634035761, guid: 48577bc70f0947840a454f4de0d36e0a,
+    type: 3}
