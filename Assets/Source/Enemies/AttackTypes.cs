@@ -1,5 +1,6 @@
 public enum AttackTypes
 {
 	ConsoleLog,
-	OnlyMaxDamage
+	OnlyMaxDamage,
+	FreezeAndDamage
 }
