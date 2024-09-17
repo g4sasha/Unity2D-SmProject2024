@@ -92,12 +92,31 @@ public class Enemy : MonoBehaviour
         switch (_properties.MoveType) // Move type switch
         {
             case MoveTypes.OnlyMaxSpeed:
-				_enemyMovement.Move(Rb, direction, _properties.MaxSpeed);
+                _enemyMovement.Move(Rb, direction, _properties.MaxSpeed);
+                break;
+            case MoveTypes.Offense:
+				MoveWithOffense(target, direction);
                 break;
         }
     }
 
-	private void CheckDeath()
+    private void MoveWithOffense(Transform target, Vector2 direction)
+    {
+		float speed;
+
+		if (Vector2.Distance(target.position, transform.position) > 3f)
+		{
+			speed = _properties.MaxSpeed / 4;
+		}
+		else
+		{
+			speed = _properties.MaxSpeed;
+		}
+
+		_enemyMovement.Move(Rb, direction, speed);
+    }
+
+    private void CheckDeath()
 	{
 		if (_currentHealth <= 0f)
 		{
