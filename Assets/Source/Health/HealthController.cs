@@ -12,6 +12,11 @@ public class HealthController : MonoBehaviour
     public float RemaningHealthPercentage => _currentHealth / _maximumHealth;
     public UnityEvent OnDied;
 
+    private void OnEnable()
+    {
+        TakeDamage(0f);
+    }
+
     public void TakeDamage(float damageAmount)
     {
         if (_currentHealth <= 0f)

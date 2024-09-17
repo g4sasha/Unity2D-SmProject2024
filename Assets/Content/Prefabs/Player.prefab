@@ -78,7 +78,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -175,7 +176,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Speed>k__BackingField: 5
   <Rb>k__BackingField: {fileID: 1130164696533452286}
-  <Bullet>k__BackingField: {fileID: 447856713104100646, guid: 0a4cb6550f4351f4c81b974295d0e272, type: 3}
+  <Bullet>k__BackingField: {fileID: 11400000, guid: 9a1f7f2fabe79474ea65adfa3c536cc1,
+    type: 2}
 --- !u!1 &2513875148175109473
 GameObject:
   m_ObjectHideFlags: 0
