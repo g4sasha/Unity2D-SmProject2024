@@ -693,6 +693,101 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89b7475065e308c4594afc8a177e5316, type: 3}
+--- !u!1001 &864731948
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2100688105097988258, guid: 89b7475065e308c4594afc8a177e5316,
+        type: 3}
+      propertyPath: _enemyType
+      value: 
+      objectReference: {fileID: 11400000, guid: 3851837a2be93824d9fe05354d7ec524,
+        type: 2}
+    - target: {fileID: 2100688105097988258, guid: 89b7475065e308c4594afc8a177e5316,
+        type: 3}
+      propertyPath: _spawnCooldown
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2100688105097988258, guid: 89b7475065e308c4594afc8a177e5316,
+        type: 3}
+      propertyPath: _maxEnemiesCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2100688105097988258, guid: 89b7475065e308c4594afc8a177e5316,
+        type: 3}
+      propertyPath: _minEnemiesCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4479568873863646408, guid: 89b7475065e308c4594afc8a177e5316,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 4479568873863646408, guid: 89b7475065e308c4594afc8a177e5316,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4479568873863646408, guid: 89b7475065e308c4594afc8a177e5316,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4479568873863646408, guid: 89b7475065e308c4594afc8a177e5316,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4479568873863646408, guid: 89b7475065e308c4594afc8a177e5316,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4479568873863646408, guid: 89b7475065e308c4594afc8a177e5316,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4479568873863646408, guid: 89b7475065e308c4594afc8a177e5316,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4479568873863646408, guid: 89b7475065e308c4594afc8a177e5316,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4479568873863646408, guid: 89b7475065e308c4594afc8a177e5316,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4479568873863646408, guid: 89b7475065e308c4594afc8a177e5316,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8951475343252647121, guid: 89b7475065e308c4594afc8a177e5316,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000,
+        type: 0}
+    - target: {fileID: 8951475343252647121, guid: 89b7475065e308c4594afc8a177e5316,
+        type: 3}
+      propertyPath: m_Name
+      value: RockSpawner
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 89b7475065e308c4594afc8a177e5316, type: 3}
 --- !u!1 &926689202
 GameObject:
   m_ObjectHideFlags: 0
@@ -1333,6 +1428,7 @@ SceneRoots:
   - {fileID: 249000793}
   - {fileID: 368954210}
   - {fileID: 814823141}
+  - {fileID: 864731948}
   - {fileID: 1167954025}
   - {fileID: 353343062}
   - {fileID: 1013511758}
