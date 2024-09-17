@@ -7,6 +7,8 @@ public class Bullet : MonoBehaviour
 
     private void OnEnable() => Destroy(gameObject, BulletType.Lifetime);
 
+    private void Start() => SoundManager.Instance.PlaySound("Shot");
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if ((BulletType.DestroyLayer & 1 << other.gameObject.layer) != 0)
