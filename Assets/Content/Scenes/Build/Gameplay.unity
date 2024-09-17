@@ -1225,6 +1225,11 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: 5032087162462265903, guid: 68e41a37757ef7545932038c95027e99,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 5837704689225698011, guid: 68e41a37757ef7545932038c95027e99,
         type: 3}
       propertyPath: m_Name
