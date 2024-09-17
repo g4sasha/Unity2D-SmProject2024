@@ -283,12 +283,12 @@ PrefabInstance:
         type: 3}
       propertyPath: <PlayerHealth>k__BackingField
       value: 
-      objectReference: {fileID: 1316141421}
+      objectReference: {fileID: 0}
     - target: {fileID: 8316511905571346018, guid: d2319712ce1c67a4c9df6cbf30f2a45e,
         type: 3}
       propertyPath: <_playerHealth>k__BackingField
       value: 
-      objectReference: {fileID: 1316141421}
+      objectReference: {fileID: 0}
     - target: {fileID: 9218048556627546172, guid: d2319712ce1c67a4c9df6cbf30f2a45e,
         type: 3}
       propertyPath: m_Name
@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 1244121061}
   - component: {fileID: 1244121063}
   m_Layer: 0
-  m_Name: Walls
+  m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -395,8 +395,8 @@ Transform:
   m_GameObject: {fileID: 1244121058}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.8908, y: 0.4, z: 0}
-  m_LocalScale: {x: 1.0339, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1751862754}
@@ -2912,18 +2912,6 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
---- !u!114 &1316141421 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1337905644071525466, guid: 68e41a37757ef7545932038c95027e99,
-    type: 3}
-  m_PrefabInstance: {fileID: 2042989085}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c96512297cbe9274ba9a7d964ed43fad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1405350935
 GameObject:
   m_ObjectHideFlags: 0
@@ -2935,7 +2923,7 @@ GameObject:
   - component: {fileID: 1405350937}
   - component: {fileID: 1405350936}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: GroundTiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2949,7 +2937,7 @@ Grid:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1405350935}
   m_Enabled: 1
-  m_CellSize: {x: 1.51, y: 1, z: 0}
+  m_CellSize: {x: 1.5, y: 1, z: 0}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 2
   m_CellSwizzle: 0
@@ -2986,7 +2974,7 @@ GameObject:
   - component: {fileID: 1751862754}
   - component: {fileID: 1751862753}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: PhysicsTiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3000,7 +2988,7 @@ Grid:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1751862752}
   m_Enabled: 1
-  m_CellSize: {x: 1.51, y: 1, z: 0}
+  m_CellSize: {x: 1.5, y: 1, z: 0}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 2
   m_CellSwizzle: 0
