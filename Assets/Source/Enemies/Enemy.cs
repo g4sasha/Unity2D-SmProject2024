@@ -42,12 +42,21 @@ public class Enemy : MonoBehaviour
                     Debug.Log("Player damaged");
                     break;
                 case AttackTypes.OnlyMaxDamage:
-					EnemyNavigator.Instance.PlayerHealth.TakeDamage(_properties.MaxDamage);
+                    EnemyNavigator.Instance.PlayerHealth.TakeDamage(_properties.MaxDamage);
+                    break;
+                case AttackTypes.FreezeAndDamage:
+					FreezeAndAttack();
                     break;
             }
 
             _cooldown = _properties.AttackDelay; // Do update coldown
         }
+    }
+
+    private void FreezeAndAttack()
+    {
+        EnemyNavigator.Instance.PlayerHealth.TakeDamage(_properties.MaxDamage / Random.Range(0.5f, 1f));
+		EnemyNavigator.Instance.Il.FreezeMovement(1.5f);
     }
 
     private void Update()

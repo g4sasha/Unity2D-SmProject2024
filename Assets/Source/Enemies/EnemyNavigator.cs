@@ -5,8 +5,9 @@ public class EnemyNavigator : MonoBehaviour
 {
 	public static EnemyNavigator Instance { get; private set; }
 	[field: SerializeField] public HealthController PlayerHealth { get; private set; }
+	[field: SerializeField] public Player Player { get; private set; }
+	[field: SerializeField] public InputListener Il { get; private set; }
 	[SerializeField] private List<Enemy> _enemies;
-	[SerializeField] private Transform _target;
 
     private void Awake() => Instance = this; // NOTE: Only gameplay scene
 
@@ -14,7 +15,7 @@ public class EnemyNavigator : MonoBehaviour
 	{
 		foreach (var enemy in _enemies)
 		{
-			enemy.Move(_target);
+			enemy.Move(Player.transform);
 		}
 	}
 
