@@ -1,51 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class HealthController : MonoBehaviour
 {
-    [SerializeField]
-    private float _currentHealth;
+    [SerializeField] private float _currentHealth;
 
-    [SerializeField]
-    private float _maximumHealth;
+    [SerializeField] private float _maximumHealth;
 
-    public float RemaningHealthPercentage
-    {
-        get
-        {
-            return _currentHealth / _maximumHealth;
-        }
-    }
+    [SerializeField] private HealthBar _healthBar;
 
-    public bool IsInvicible { get; set; }
-
+    public float RemaningHealthPercentage => _currentHealth / _maximumHealth;
     public UnityEvent OnDied;
-
-    public UnityEvent OnDamage;
-
-    public UnityEvent OnHealthChanged;
 
     public void TakeDamage(float damageAmount)
     {
-        if (_currentHealth ==0)
+        if (_currentHealth <= 0f)
         {
+            _currentHealth = 0;
             return;
         }
 
         _currentHealth -= damageAmount;
 
-        OnHealthChanged.Invoke();
+        _healthBar.UpdateHealthBar(this);
 
-        if (_currentHealth < 0)
+        if (_currentHealth <= 0f)
         {
-            _currentHealth = 0;
-        }
-
-        if(_currentHealth ==0)
-        {
-            OnDied.Invoke();
+            OnDied?.Invoke();
         }
     }
 }
