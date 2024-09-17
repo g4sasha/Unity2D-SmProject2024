@@ -1,4 +1,5 @@
 public enum MoveTypes
 {
-	OnlyMaxSpeed
+	OnlyMaxSpeed,
+	Offense
 }
