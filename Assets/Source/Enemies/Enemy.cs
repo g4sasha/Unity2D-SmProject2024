@@ -4,16 +4,16 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(RedImpulse))]
 public class Enemy : MonoBehaviour
 {
+	public RigidbodyMovement2D EnemyMovement { get; private set; }
 	[field: SerializeField] public Rigidbody2D Rb { get; private set; }
+	[field: SerializeField] public float CurrentHealth { get; private set; }
 	[SerializeField] private EnemyProperty _property;
 	[SerializeField] private LayerMask _playerLayer;
 	[SerializeField] private LayerMask _bulletLayer;
 	[SerializeField] private GameObject _expPrefab;
 	[SerializeField] private RedImpulse _redImpulse;
-	private float _currentHealth;
 	private float _cooldown;
 	private bool _readyToAttack;
-	private RigidbodyMovement2D _enemyMovement;
 
 	private void OnValidate()
 	{
@@ -23,8 +23,13 @@ public class Enemy : MonoBehaviour
 
 	private void Awake()
 	{
-		_currentHealth = _property.MaxHealth;
-		_enemyMovement = new RigidbodyMovement2D();
+		CurrentHealth = _property.MaxHealth;
+		EnemyMovement = new RigidbodyMovement2D();
+	}
+
+	private void Update()
+	{
+		UpdateCooldown();
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)
@@ -32,8 +37,8 @@ public class Enemy : MonoBehaviour
 		if ((_bulletLayer & 1 << other.gameObject.layer) != 0)
 		{
 			var damage = other.GetComponent<Bullet>().BulletType.Damage; // TODO: not use GetComponent
-			var ActivityHandler = new ActivityHandler<DamageTypes>(_property.DamageType, this, _property, damage);
-			ActivityHandler.Execute();
+			var activityHandler = new ActivityHandler<DamageTypes>(_property.DamageType, this, _property, damage);
+			activityHandler.Execute();
         }
     }
 
@@ -41,76 +46,48 @@ public class Enemy : MonoBehaviour
 	{
 		if ((_playerLayer & 1 << collision.gameObject.layer) != 0 && _readyToAttack)
 		{
-            switch (_property.AttackType) // Attack type switch
-            {
-                case AttackTypes.ConsoleLog:
-                    Debug.Log("Player damaged");
-                    break;
-                case AttackTypes.OnlyMaxDamage:
-                    EnemyNavigator.Instance.PlayerHealth.TakeDamage(_property.MaxDamage);
-                    break;
-                case AttackTypes.FreezeAndDamage:
-					FreezeAndAttack();
-                    break;
-            }
-
+            var activityHandler = new ActivityHandler<AttackTypes>(_property.AttackType, this, _property);
+			activityHandler.Execute();
             _cooldown = _property.AttackDelay; // Do update coldown
         }
     }
-
-    private void Update()
-	{
-		UpdateCooldown();
-	}
 
 	public void RedImpulse()
 	{
 		_redImpulse.Impulse().Forget();
 	}
 
-	private void FreezeAndAttack()
+	public void SetHealth(float health)
+	{
+		CurrentHealth = health;
+		CheckDeath();
+	}
+
+	public void TakeDamage(float damage)
+    {
+		CurrentHealth -= damage > 0f ? damage : 0f;
+		CheckDeath();
+    }
+
+	public void FreezeAndAttack()
     {
         EnemyNavigator.Instance.PlayerHealth.TakeDamage(_property.MaxDamage / Random.Range(0.5f, 1f));
 		EnemyNavigator.Instance.Il.FreezeMovement(1.5f);
     }
 
-    public void TakeDamage(float damage)
+    public void Heal(float heal) // NOTE: not in the TOR
     {
-		_currentHealth -= damage > 0f ? damage : 0f;
-		CheckDeath();
-    }
-
-    public void Heal(float heal, bool logging = false) // NOTE: not in the TOR
-    {
-        switch (_property.HealType) // Heal type switch
-        {
-            case HealTypes.OnlyHeal:
-				_currentHealth += heal > 0f ? heal : 0f;
-                break;
-        }
-
-		if (logging)
-		{
-			Debug.Log($"{_property.Name} healed! {_currentHealth} -> {_currentHealth + heal}");
-		}
+        new ActivityHandler<HealTypes>(_property.HealType, this, _property, heal).Execute();
     }
 
     public void Move(Transform target)
 	{
 		Vector2 direction = (target.position - transform.position).normalized;
-
-        switch (_property.MoveType) // Move type switch
-        {
-            case MoveTypes.OnlyMaxSpeed:
-                _enemyMovement.Move(Rb, direction, _property.MaxSpeed);
-                break;
-            case MoveTypes.Offense:
-				MoveWithOffense(target, direction);
-                break;
-        }
+        var activityHandler = new ActivityHandler<MoveTypes>(_property.MoveType, this, _property, direction);
+		activityHandler.Execute();
     }
 
-    private void MoveWithOffense(Transform target, Vector2 direction)
+    public void MoveWithOffense(Transform target, Vector2 direction)
     {
 		float speed;
 
@@ -123,20 +100,15 @@ public class Enemy : MonoBehaviour
 			speed = _property.MaxSpeed;
 		}
 
-		_enemyMovement.Move(Rb, direction, speed);
+		EnemyMovement.Move(Rb, direction, speed);
     }
 
     private void CheckDeath()
 	{
-		if (_currentHealth <= 0f)
+		if (CurrentHealth <= 0f)
 		{
-            switch (_property.DeathType) // Death type switch
-            {
-                case DeathTypes.OnlyDestroy:
-					Destroy(gameObject);
-                    break;
-            }
-
+            var activityHandler = new ActivityHandler<DeathTypes>(_property.DeathType, this, _property);
+			activityHandler.Execute();
 			Instantiate(_expPrefab, transform.position, Quaternion.identity).GetComponent<Expirience>().SetWeight(_property.Expirience); // TODO: not use Instantiate
 			EnemyNavigator.Instance.RemoveEnemy(this);
         }
