@@ -10,6 +10,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 840422519609517615, guid: 94b8b1c24b7243d46b7a9614c47a7164,
         type: 3}
+      propertyPath: _property
+      value: 
+      objectReference: {fileID: 11400000, guid: 76ecc0f8fe731e34f923fab1492ebb4b,
+        type: 2}
+    - target: {fileID: 840422519609517615, guid: 94b8b1c24b7243d46b7a9614c47a7164,
+        type: 3}
       propertyPath: _properties
       value: 
       objectReference: {fileID: 11400000, guid: 76ecc0f8fe731e34f923fab1492ebb4b,

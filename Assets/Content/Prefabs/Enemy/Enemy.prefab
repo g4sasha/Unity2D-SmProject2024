@@ -110,6 +110,7 @@ MonoBehaviour:
     m_Bits: 64
   _expPrefab: {fileID: 9030241839283132744, guid: 12a3eedb7f2978642a3247996663524e,
     type: 3}
+  _spriteRenderer: {fileID: 7843649705056222370}
 --- !u!50 &8841744643199852898
 Rigidbody2D:
   serializedVersion: 4
