@@ -1,4 +1,6 @@
+using System.Threading;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(SpriteRenderer))]
@@ -14,6 +16,7 @@ public class Enemy : MonoBehaviour
 	private float _cooldown;
 	private bool _readyToAttack;
 	private RigidbodyMovement2D _enemyMovement;
+	private Tween _colorTween;
 
 	private void OnValidate()
 	{
@@ -57,19 +60,26 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void FreezeAndAttack()
-    {
-        EnemyNavigator.Instance.PlayerHealth.TakeDamage(_properties.MaxDamage / Random.Range(0.5f, 1f));
-		EnemyNavigator.Instance.Il.FreezeMovement(1.5f);
-    }
+	private void OnDestroy()
+	{
+		_colorTween.Kill();
+	}
 
     private void Update()
 	{
 		UpdateCooldown();
 	}
 
+	private void FreezeAndAttack()
+    {
+        EnemyNavigator.Instance.PlayerHealth.TakeDamage(_properties.MaxDamage / Random.Range(0.5f, 1f));
+		EnemyNavigator.Instance.Il.FreezeMovement(1.5f);
+    }
+
     public void TakeDamage(float damage)
     {
+		CheckDeath();
+		
         switch (_properties.DamageType) // Damage type switch
         {
             case DamageTypes.DamageWithLogging:
@@ -80,27 +90,44 @@ public class Enemy : MonoBehaviour
                 _currentHealth -= damage > 0f ? damage : 0f;
                 break;
             case DamageTypes.DamageWithRedImpulse:
-				DamageWithRedImpulse(damage).Forget();
+				DamageWithRedImpulse(damage);
                 break;
         }
-
-        CheckDeath();
     }
 
-    private async UniTaskVoid DamageWithRedImpulse(float damage)
-    {
+	private void DamageWithRedImpulse(float damage)
+	{
 		_currentHealth -= damage > 0f ? damage : 0f;
 
-		_spriteRenderer.color = Color.red;
-		await UniTask.Delay(100);
+		Debug.Log(gameObject.GetInstanceID() + ' ' +_currentHealth);
 
-		if (_currentHealth <= 0f)
-		{
-			return;
-		}
+		Debug.Log(_spriteRenderer);
+		_colorTween = _spriteRenderer?.DOColor(Color.red, 0.1f).OnComplete(() =>
+			{ Debug.Log(_spriteRenderer);
+			_colorTween = _spriteRenderer?.DOColor(Color.white, 0.1f);});
 
-		_spriteRenderer.color = Color.white;
-    }
+		Debug.Log(gameObject.GetInstanceID() + ' ' +_currentHealth);
+	}
+
+    //private async UniTaskVoid DamageWithRedImpulse(float damage)
+	//{
+	//	_currentHealth -= damage > 0f ? damage : 0f;
+
+	//	Debug.Log("StartColorTween");
+	//	_colorTween = _spriteRenderer?.DOColor(Color.red, 0.1f).OnUpdate(() => { Debug.Log(" First color tween update ");}).OnComplete(() => { Debug.Log(" First color tween complete ");});
+		
+	//	await UniTask.Delay(100);
+
+	//	//if (_currentHealth <= 0f)
+	//	//{
+	//	//	return;
+	//	//}
+
+	//	Debug.Log("SecondColorTween");
+	//	_colorTween = _spriteRenderer?.DOColor(Color.white, 0.1f).OnUpdate(() => { Debug.Log(" Second color tween update ");}).OnComplete(() => { 
+	//		Debug.Log(" Second color tween complete "); _colorTween.Kill();});
+	//	_colorTween.Kill();
+	//}
 
     public void Heal(float heal, bool logging = false) // NOTE: not in the TOR
     {
