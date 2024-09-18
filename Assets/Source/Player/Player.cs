@@ -16,4 +16,6 @@ public class Player : MonoBehaviour
     }
 
     private void OnValidate() => Rb = GetComponent<Rigidbody2D>();
+
+
 }
