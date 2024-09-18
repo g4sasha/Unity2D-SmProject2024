@@ -23,12 +23,12 @@ public class Player : MonoBehaviour
         _expBar.Construct(Expirience);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((_expLayer & 1 << other.gameObject.layer) != 0)
+        if ((_expLayer & 1 << collision.gameObject.layer) != 0)
         {
-            Expirience.AddExp(other.GetComponent<Expirience>().Weight); // TODO: not use GetComponent
-            Destroy(other.gameObject);
+            Expirience.AddExp(collision.gameObject.GetComponent<Expirience>().Weight); // TODO: not use GetComponent
+            Destroy(collision.gameObject);
         }
     }
 }
