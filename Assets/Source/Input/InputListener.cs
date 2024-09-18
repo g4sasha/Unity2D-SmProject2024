@@ -3,15 +3,38 @@ using UnityEngine;
 
 public class InputListener : MonoBehaviour
 {
+    public bool Enabled { get; set; } = true;
     [SerializeField] private Player _player;
     [SerializeField] private VignetteEffect _vignette;
+    [SerializeField] private PauseManager _pauseManager;
     private bool _readyToShoot = true;
     private bool _canMove = true;
 
     private void Update()
     {
+        if (!Enabled)
+        {
+            return;
+        }
+
         Movement();
         Shooting();
+        PauseHandler();
+    }
+
+    private void PauseHandler()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (_pauseManager.isActiveAndEnabled)
+            {
+                _pauseManager.Hide();
+            }
+            else
+            {
+                _pauseManager.Show();
+            }
+        }
     }
 
     public void FreezeMovement(float duration) => StartCoroutine(FreezeRoutine(duration));
