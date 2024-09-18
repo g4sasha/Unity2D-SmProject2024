@@ -1,15 +1,15 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(RedImpulse))]
 public class Enemy : MonoBehaviour
 {
 	[field: SerializeField] public Rigidbody2D Rb { get; private set; }
-	[SerializeField] private EnemyProperty _properties;
+	[SerializeField] private EnemyProperty _property;
 	[SerializeField] private LayerMask _playerLayer;
 	[SerializeField] private LayerMask _bulletLayer;
 	[SerializeField] private GameObject _expPrefab;
-	[SerializeField] private SpriteRenderer _spriteRenderer;
+	[SerializeField] private RedImpulse _redImpulse;
 	private float _currentHealth;
 	private float _cooldown;
 	private bool _readyToAttack;
@@ -18,12 +18,12 @@ public class Enemy : MonoBehaviour
 	private void OnValidate()
 	{
 		Rb = GetComponent<Rigidbody2D>();
-		_spriteRenderer = GetComponent<SpriteRenderer>();
+		_redImpulse = GetComponent<RedImpulse>();
 	}
 
 	private void Awake()
 	{
-		_currentHealth = _properties.MaxHealth;
+		_currentHealth = _property.MaxHealth;
 		_enemyMovement = new RigidbodyMovement2D();
 	}
 
@@ -32,7 +32,8 @@ public class Enemy : MonoBehaviour
 		if ((_bulletLayer & 1 << other.gameObject.layer) != 0)
 		{
 			var damage = other.GetComponent<Bullet>().BulletType.Damage; // TODO: not use GetComponent
-			TakeDamage(damage);
+			var ActivityHandler = new ActivityHandler<DamageTypes>(_property.DamageType, this, _property, damage);
+			ActivityHandler.Execute();
         }
     }
 
@@ -40,27 +41,21 @@ public class Enemy : MonoBehaviour
 	{
 		if ((_playerLayer & 1 << collision.gameObject.layer) != 0 && _readyToAttack)
 		{
-            switch (_properties.AttackType) // Attack type switch
+            switch (_property.AttackType) // Attack type switch
             {
                 case AttackTypes.ConsoleLog:
                     Debug.Log("Player damaged");
                     break;
                 case AttackTypes.OnlyMaxDamage:
-                    EnemyNavigator.Instance.PlayerHealth.TakeDamage(_properties.MaxDamage);
+                    EnemyNavigator.Instance.PlayerHealth.TakeDamage(_property.MaxDamage);
                     break;
                 case AttackTypes.FreezeAndDamage:
 					FreezeAndAttack();
                     break;
             }
 
-            _cooldown = _properties.AttackDelay; // Do update coldown
+            _cooldown = _property.AttackDelay; // Do update coldown
         }
-    }
-
-    private void FreezeAndAttack()
-    {
-        EnemyNavigator.Instance.PlayerHealth.TakeDamage(_properties.MaxDamage / Random.Range(0.5f, 1f));
-		EnemyNavigator.Instance.Il.FreezeMovement(1.5f);
     }
 
     private void Update()
@@ -68,43 +63,26 @@ public class Enemy : MonoBehaviour
 		UpdateCooldown();
 	}
 
-    public void TakeDamage(float damage)
-    {
-        switch (_properties.DamageType) // Damage type switch
-        {
-            case DamageTypes.DamageWithLogging:
-                Debug.Log($"{_properties.Name} took damage! {_currentHealth} -> {_currentHealth - damage}");
-                _currentHealth -= damage > 0f ? damage : 0f;
-                break;
-            case DamageTypes.OnlyDamage:
-                _currentHealth -= damage > 0f ? damage : 0f;
-                break;
-            case DamageTypes.DamageWithRedImpulse:
-				DamageWithRedImpulse(damage).Forget();
-                break;
-        }
+	public void RedImpulse()
+	{
+		_redImpulse.Impulse().Forget();
+	}
 
-        CheckDeath();
+	private void FreezeAndAttack()
+    {
+        EnemyNavigator.Instance.PlayerHealth.TakeDamage(_property.MaxDamage / Random.Range(0.5f, 1f));
+		EnemyNavigator.Instance.Il.FreezeMovement(1.5f);
     }
 
-    private async UniTaskVoid DamageWithRedImpulse(float damage)
+    public void TakeDamage(float damage)
     {
 		_currentHealth -= damage > 0f ? damage : 0f;
-
-		_spriteRenderer.color = Color.red;
-		await UniTask.Delay(100);
-
-		if (_currentHealth <= 0f)
-		{
-			return;
-		}
-
-		_spriteRenderer.color = Color.white;
+		CheckDeath();
     }
 
     public void Heal(float heal, bool logging = false) // NOTE: not in the TOR
     {
-        switch (_properties.HealType) // Heal type switch
+        switch (_property.HealType) // Heal type switch
         {
             case HealTypes.OnlyHeal:
 				_currentHealth += heal > 0f ? heal : 0f;
@@ -113,7 +91,7 @@ public class Enemy : MonoBehaviour
 
 		if (logging)
 		{
-			Debug.Log($"{_properties.Name} healed! {_currentHealth} -> {_currentHealth + heal}");
+			Debug.Log($"{_property.Name} healed! {_currentHealth} -> {_currentHealth + heal}");
 		}
     }
 
@@ -121,10 +99,10 @@ public class Enemy : MonoBehaviour
 	{
 		Vector2 direction = (target.position - transform.position).normalized;
 
-        switch (_properties.MoveType) // Move type switch
+        switch (_property.MoveType) // Move type switch
         {
             case MoveTypes.OnlyMaxSpeed:
-                _enemyMovement.Move(Rb, direction, _properties.MaxSpeed);
+                _enemyMovement.Move(Rb, direction, _property.MaxSpeed);
                 break;
             case MoveTypes.Offense:
 				MoveWithOffense(target, direction);
@@ -138,11 +116,11 @@ public class Enemy : MonoBehaviour
 
 		if (Vector2.Distance(target.position, transform.position) > 3f)
 		{
-			speed = _properties.MaxSpeed / 4;
+			speed = _property.MaxSpeed / 4;
 		}
 		else
 		{
-			speed = _properties.MaxSpeed;
+			speed = _property.MaxSpeed;
 		}
 
 		_enemyMovement.Move(Rb, direction, speed);
@@ -152,14 +130,14 @@ public class Enemy : MonoBehaviour
 	{
 		if (_currentHealth <= 0f)
 		{
-            switch (_properties.DeathType) // Death type switch
+            switch (_property.DeathType) // Death type switch
             {
                 case DeathTypes.OnlyDestroy:
 					Destroy(gameObject);
                     break;
             }
 
-			Instantiate(_expPrefab, transform.position, Quaternion.identity).GetComponent<Expirience>().SetWeight(_properties.Expirience); // TODO: not use Instantiate
+			Instantiate(_expPrefab, transform.position, Quaternion.identity).GetComponent<Expirience>().SetWeight(_property.Expirience); // TODO: not use Instantiate
 			EnemyNavigator.Instance.RemoveEnemy(this);
         }
     }
