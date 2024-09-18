@@ -26,5 +26,15 @@ public class SoundManager : MonoBehaviour
 		}
 	}
 
-    public void PlaySound(string name) => _audioSource.PlayOneShot(_sounds.Find(x => x.Name == name).Audio);
+    public void PlaySound(string name)
+    {
+        foreach (var sound in _sounds)
+		{
+			if (sound.Name == name)
+			{
+				_audioSource.PlayOneShot(sound.Audio);
+				return;
+			}
+		}
+    }
 }

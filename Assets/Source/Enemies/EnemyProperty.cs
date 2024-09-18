@@ -10,6 +10,7 @@ public class EnemyProperty : ScriptableObject
     [field: SerializeField] public float MinDamage { get; private set; }
     [field: SerializeField] public float MaxDamage { get; private set; }
     [field: SerializeField] public float AttackDelay { get; private set; }
+    [field: SerializeField] public float Expirience { get; private set; }
     [field: SerializeField] public DeathTypes DeathType { get; private set; }
     [field: SerializeField] public AttackTypes AttackType { get; private set; }
     [field: SerializeField] public DamageTypes DamageType { get; private set; }

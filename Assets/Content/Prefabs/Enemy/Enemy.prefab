@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3797253123259094863}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -108,6 +108,9 @@ MonoBehaviour:
   _bulletLayer:
     serializedVersion: 2
     m_Bits: 64
+  _expPrefab: {fileID: 9030241839283132744, guid: 12a3eedb7f2978642a3247996663524e,
+    type: 3}
+  _spriteRenderer: {fileID: 7843649705056222370}
 --- !u!50 &8841744643199852898
 Rigidbody2D:
   serializedVersion: 4
