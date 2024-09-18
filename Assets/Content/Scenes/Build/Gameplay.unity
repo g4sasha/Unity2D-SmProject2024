@@ -1153,7 +1153,7 @@ GameObject:
   - component: {fileID: 1015404393}
   - component: {fileID: 1015404392}
   m_Layer: 5
-  m_Name: Exp
+  m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1759,6 +1759,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1508168095}
+  - component: {fileID: 1508168096}
   m_Layer: 5
   m_Name: ExpBar
   m_TagString: Untagged
@@ -1788,6 +1789,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -456}
   m_SizeDelta: {x: 1145.11, y: 45.23}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1508168096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508168094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b67cd6203746ec6489e59537be9e431f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _foreground: {fileID: 325778927}
+  _levelField: {fileID: 1015404392}
+  _levelFormat: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C: {0}"
 --- !u!1001 &1561907204
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2161,6 +2177,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2656217832435209947, guid: 9202ebec274ecf94f95461eeb0adb539,
+        type: 3}
+      propertyPath: _expBar
+      value: 
+      objectReference: {fileID: 1508168096}
     - target: {fileID: 3922456077076753740, guid: 9202ebec274ecf94f95461eeb0adb539,
         type: 3}
       propertyPath: _vignette

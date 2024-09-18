@@ -76,6 +76,7 @@ public class Enemy : MonoBehaviour
 				_currentHealth -= damage > 0f ? damage : 0f;
                 break;
         }
+
         CheckDeath();
     }
 
@@ -136,6 +137,7 @@ public class Enemy : MonoBehaviour
                     break;
             }
 
+			EnemyNavigator.Instance.Player.Expirience.AddExp(0.1f); // Add exp TODO: in enemy properties
 			EnemyNavigator.Instance.RemoveEnemy(this);
         }
     }
