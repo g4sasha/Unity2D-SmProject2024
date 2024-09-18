@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
 	public BulletSpawner BulletSpawner { get; private set; }
     public ExpBank Expirience { get; private set; }
     [SerializeField] private ExpBar _expBar;
+    [SerializeField] private LayerMask _expLayer;
+
+    private void OnValidate() => Rb = GetComponent<Rigidbody2D>();
 
     private void Awake()
     {
@@ -20,5 +23,12 @@ public class Player : MonoBehaviour
         _expBar.Construct(Expirience);
     }
 
-    private void OnValidate() => Rb = GetComponent<Rigidbody2D>();
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if ((_expLayer & 1 << other.gameObject.layer) != 0)
+        {
+            Expirience.AddExp(other.GetComponent<Expirience>().Weight); // TODO: not use GetComponent
+            Destroy(other.gameObject);
+        }
+    }
 }
