@@ -1,5 +1,6 @@
 public enum DamageTypes
 {
 	DamageWithLogging,
-	OnlyDamage
+	OnlyDamage,
+	DamageWithRedImpulse
 }

@@ -1,6 +1,7 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(SpriteRenderer))]
 public class Enemy : MonoBehaviour
 {
 	[field: SerializeField] public Rigidbody2D Rb { get; private set; }
@@ -8,6 +9,7 @@ public class Enemy : MonoBehaviour
 	[SerializeField] private LayerMask _playerLayer;
 	[SerializeField] private LayerMask _bulletLayer;
 	[SerializeField] private GameObject _expPrefab;
+	[SerializeField] private SpriteRenderer _spriteRenderer;
 	private float _currentHealth;
 	private float _cooldown;
 	private bool _readyToAttack;
@@ -16,6 +18,7 @@ public class Enemy : MonoBehaviour
 	private void OnValidate()
 	{
 		Rb = GetComponent<Rigidbody2D>();
+		_spriteRenderer = GetComponent<SpriteRenderer>();
 	}
 
 	private void Awake()
@@ -70,15 +73,33 @@ public class Enemy : MonoBehaviour
         switch (_properties.DamageType) // Damage type switch
         {
             case DamageTypes.DamageWithLogging:
-				Debug.Log($"{_properties.Name} took damage! {_currentHealth} -> {_currentHealth - damage}");
-				_currentHealth -= damage > 0f ? damage : 0f;
+                Debug.Log($"{_properties.Name} took damage! {_currentHealth} -> {_currentHealth - damage}");
+                _currentHealth -= damage > 0f ? damage : 0f;
                 break;
             case DamageTypes.OnlyDamage:
-				_currentHealth -= damage > 0f ? damage : 0f;
+                _currentHealth -= damage > 0f ? damage : 0f;
+                break;
+            case DamageTypes.DamageWithRedImpulse:
+				DamageWithRedImpulse(damage).Forget();
                 break;
         }
 
         CheckDeath();
+    }
+
+    private async UniTaskVoid DamageWithRedImpulse(float damage)
+    {
+		_currentHealth -= damage > 0f ? damage : 0f;
+
+		_spriteRenderer.color = Color.red;
+		await UniTask.Delay(100);
+
+		if (_currentHealth <= 0f)
+		{
+			return;
+		}
+
+		_spriteRenderer.color = Color.white;
     }
 
     public void Heal(float heal, bool logging = false) // NOTE: not in the TOR

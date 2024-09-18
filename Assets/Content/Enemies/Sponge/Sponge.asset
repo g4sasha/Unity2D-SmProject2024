@@ -26,7 +26,7 @@ MonoBehaviour:
   <Expirience>k__BackingField: 0.3
   <DeathType>k__BackingField: 0
   <AttackType>k__BackingField: 1
-  <DamageType>k__BackingField: 1
+  <DamageType>k__BackingField: 2
   <MoveType>k__BackingField: 0
   <HealType>k__BackingField: 0
   <Prefab>k__BackingField: {fileID: 5979143022634035761, guid: cf0feef6913ccf74fb9229651954f57d,
