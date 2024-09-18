@@ -1,24 +1,26 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameOverManager : MonoBehaviour {
-    public GameObject gameOverPanel;
+public class GameOverManager : MonoBehaviour
+{
+    public GameObject GameOverPanel;
+    [SerializeField] private InputListener _inputListener;
 
-
-    void Start() {
-        gameOverPanel.SetActive(false); 
-        Time.timeScale = 1; 
+    private void Start()
+	{
+        GameOverPanel.SetActive(false);
+        Time.timeScale = 1;
     }
 
-    public void ShowGameOver() {
-        gameOverPanel.SetActive(true); 
-        Time.timeScale = 0; 
-
+    public void ShowGameOver()
+	{
+        GameOverPanel.SetActive(true);
+        Time.timeScale = 0;
+        _inputListener.Enabled = false;
     }
 
-    public void RestartGame() {
-        Time.timeScale = 1; 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
+    public void RestartGame()
+	{
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
