@@ -8,12 +8,27 @@ public class Player : MonoBehaviour
 	[field: SerializeField] public BulletType Bullet { get; private set; }
 	public RigidbodyMovement2D PlayerMovment { get; private set; }
 	public BulletSpawner BulletSpawner { get; private set; }
+    public ExpBank Expirience { get; private set; }
+    [SerializeField] private ExpBar _expBar;
+    [SerializeField] private LayerMask _expLayer;
+
+    private void OnValidate() => Rb = GetComponent<Rigidbody2D>();
 
     private void Awake()
     {
         PlayerMovment = new RigidbodyMovement2D();
 		BulletSpawner = new BulletSpawner();
+        Expirience = new ExpBank(level: 0, exp: 0);
+
+        _expBar.Construct(Expirience);
     }
 
-    private void OnValidate() => Rb = GetComponent<Rigidbody2D>();
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if ((_expLayer & 1 << collision.gameObject.layer) != 0)
+        {
+            Expirience.AddExp(collision.gameObject.GetComponent<Expirience>().Weight); // TODO: not use GetComponent
+            Destroy(collision.gameObject);
+        }
+    }
 }

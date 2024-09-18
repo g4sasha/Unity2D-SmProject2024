@@ -25,6 +25,7 @@ MonoBehaviour:
   <MinDamage>k__BackingField: 5
   <MaxDamage>k__BackingField: 5
   <AttackDelay>k__BackingField: 1.5
+  <Expirience>k__BackingField: 0.1
   <DeathType>k__BackingField: 0
   <AttackType>k__BackingField: 1
   <DamageType>k__BackingField: 1

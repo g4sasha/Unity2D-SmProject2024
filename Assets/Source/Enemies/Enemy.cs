@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 	[SerializeField] private EnemyProperty _properties;
 	[SerializeField] private LayerMask _playerLayer;
 	[SerializeField] private LayerMask _bulletLayer;
+	[SerializeField] private GameObject _expPrefab;
 	private float _currentHealth;
 	private float _cooldown;
 	private bool _readyToAttack;
@@ -76,6 +77,7 @@ public class Enemy : MonoBehaviour
 				_currentHealth -= damage > 0f ? damage : 0f;
                 break;
         }
+
         CheckDeath();
     }
 
@@ -136,6 +138,7 @@ public class Enemy : MonoBehaviour
                     break;
             }
 
+			Instantiate(_expPrefab, transform.position, Quaternion.identity).GetComponent<Expirience>().SetWeight(_properties.Expirience); // TODO: not use Instantiate
 			EnemyNavigator.Instance.RemoveEnemy(this);
         }
     }
