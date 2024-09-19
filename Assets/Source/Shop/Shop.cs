@@ -13,7 +13,7 @@ public class Shop : MonoBehaviour
         _snippetField.gameObject.SetActive(false);
         _shop.SetActive(false);
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
       _snippetField.gameObject.SetActive(true); 
       _inTrigger = true;     
@@ -27,7 +27,15 @@ public class Shop : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.E)&&_inTrigger) {
             _shop.SetActive(!_shop.activeSelf);
-            Time.timeScale = _shop.activeSelf ? 0 : 1; 
+        }
+
+        if (_shop.activeSelf)
+        {
+          Time.timeScale = 0;
+        }
+        else
+        {
+          Time.timeScale = 1;
         }
     }
 }
