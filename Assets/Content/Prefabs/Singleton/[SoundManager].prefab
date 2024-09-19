@@ -45,7 +45,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -142,6 +142,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sounds:
-  - <Name>k__BackingField: Shot
-    <Audio>k__BackingField: {fileID: 8300000, guid: 579d72130c51fa6438d8dc33ca9b548a,
-      type: 3}
+  - {fileID: 8300000, guid: 579d72130c51fa6438d8dc33ca9b548a, type: 3}
