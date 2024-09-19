@@ -133,10 +133,14 @@ MonoBehaviour:
   <Rb>k__BackingField: {fileID: 1130164696533452286}
   <Bullet>k__BackingField: {fileID: 11400000, guid: 9a1f7f2fabe79474ea65adfa3c536cc1,
     type: 2}
+  <Health>k__BackingField: {fileID: 0}
   _expBar: {fileID: 0}
   _expLayer:
     serializedVersion: 2
     m_Bits: 512
+  _healLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!58 &2859716642735183626
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -218,6 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 2656217832435209947}
   _vignette: {fileID: 0}
+  _pauseManager: {fileID: 0}
 --- !u!1 &3832463551595334485
 GameObject:
   m_ObjectHideFlags: 0

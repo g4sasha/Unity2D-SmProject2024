@@ -34,4 +34,16 @@ public class HealthController : MonoBehaviour
             OnDied?.Invoke();
         }
     }
+
+    public void Heal(float percent)
+    {
+        _currentHealth += _maximumHealth * percent;
+
+        if (_currentHealth > _maximumHealth)
+        {
+            _currentHealth = _maximumHealth;
+        }
+
+        TakeDamage(0f);
+    }
 }
