@@ -12,23 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81fccb8194831a44fb4baa78abbc46fd, type: 3}
   m_Name: Statue
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: "\u0417\u0432\u0451\u0437\u0434\u044B"
-  <Description>k__BackingField: "\u0410\u0433\u0440\u0435\u0441\u0441\u0438\u0432\u043D\u044B\u0435
-    \u043C\u043E\u0440\u0441\u043A\u0438\u0435 \u0437\u0432\u0435\u0437\u0434\u044B
-    \u0441 \u0433\u0440\u0443\u0431\u044B\u043C\u0438 \u0447\u0435\u0440\u0442\u0430\u043C\u0438,
-    \u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u0434\u0432\u0438\u0436\u0443\u0442\u0441\u044F
-    \u043C\u0435\u0434\u043B\u0435\u043D\u043D\u043E, \u043D\u043E \u0443\u0432\u0435\u0440\u0435\u043D\u043D\u043E
-    \u043A \u0446\u0435\u043B\u0438"
-  <MaxHealth>k__BackingField: 100
-  <MaxSpeed>k__BackingField: 1
-  <MinDamage>k__BackingField: 15
-  <MaxDamage>k__BackingField: 15
-  <AttackDelay>k__BackingField: 0.75
-  <Expirience>k__BackingField: 0.1
+  <Name>k__BackingField: "\u0421\u0442\u0430\u0442\u0443\u044F"
+  <Description>k__BackingField: "\u041C\u043E\u0436\u0435\u0442 \u0445\u0440\u0430\u043D\u0438\u0442\u044C
+    \u0432 \u0441\u0435\u0431\u0435 \u0430\u043F\u0442\u0435\u0447\u043A\u0443"
+  <MaxHealth>k__BackingField: 200
+  <MaxSpeed>k__BackingField: 0
+  <MinDamage>k__BackingField: 0
+  <MaxDamage>k__BackingField: 0
+  <AttackDelay>k__BackingField: 0
+  <Expirience>k__BackingField: 0
   <DeathType>k__BackingField: 0
   <AttackType>k__BackingField: 1
   <DamageType>k__BackingField: 2
   <MoveType>k__BackingField: 0
   <HealType>k__BackingField: 0
-  <Prefab>k__BackingField: {fileID: 5979143022634035761, guid: 6a9df79bdd3ee7c4f9a801ea23d4e20e,
+  <Prefab>k__BackingField: {fileID: 5979143022634035761, guid: 73b49e7224f475e44bd25448a28ab28f,
     type: 3}
