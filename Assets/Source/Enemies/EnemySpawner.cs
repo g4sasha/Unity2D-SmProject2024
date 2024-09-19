@@ -28,8 +28,6 @@ public class EnemySpawner : MonoBehaviour
         {
             yield return new WaitForSeconds(_spawnCooldown);
 
-            if (_enemyType.Name == "Статуя") Debug.Log($"Spawn statue");
-
             for (int i = 0; i < Random.Range(_minEnemiesCount, _maxEnemiesCount + 1); i++)
             {
                 EnemyNavigator.Instance.AddEnemy(

@@ -160,8 +160,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75dc0a090ce944a49b741c5346356f5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _autoFind: 1
+  _autoFind: 0
   _target: {fileID: 0}
   _spriteRenderer: {fileID: 761845730686763484}
   _min: -100
   _max: 100
+  _offset: -1.5

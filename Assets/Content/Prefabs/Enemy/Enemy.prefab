@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 8841744643199852898}
   - component: {fileID: 8107040617520190220}
   - component: {fileID: 4297586069076860073}
-  - component: {fileID: 5970166809922499791}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -114,6 +113,7 @@ MonoBehaviour:
   _expPrefab: {fileID: 9030241839283132744, guid: 12a3eedb7f2978642a3247996663524e,
     type: 3}
   _redImpulse: {fileID: 4297586069076860073}
+  _spriteRenderer: {fileID: 7843649705056222370}
 --- !u!50 &8841744643199852898
 Rigidbody2D:
   serializedVersion: 4
@@ -189,21 +189,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 7843649705056222370}
---- !u!114 &5970166809922499791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3797253123259094863}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75dc0a090ce944a49b741c5346356f5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _autoFind: 1
-  _target: {fileID: 0}
-  _spriteRenderer: {fileID: 7843649705056222370}
-  _min: -100
-  _max: 100
-  _offset: -0.5
