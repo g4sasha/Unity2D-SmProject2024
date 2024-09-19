@@ -9,13 +9,23 @@ public class GameOverManager : MonoBehaviour
     private void Start()
 	{
         GameOverPanel.SetActive(false);
-        Time.timeScale = 1;
+    }
+
+    private void Update()
+    {
+        if (GameOverPanel.activeSelf)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
     }
 
     public void ShowGameOver()
 	{
         GameOverPanel.SetActive(true);
-        Time.timeScale = 0;
         _inputListener.Enabled = false;
     }
 
