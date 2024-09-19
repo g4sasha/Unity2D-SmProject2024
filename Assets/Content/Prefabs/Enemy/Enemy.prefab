@@ -206,3 +206,4 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 7843649705056222370}
   _min: -100
   _max: 100
+  _offset: -0.5

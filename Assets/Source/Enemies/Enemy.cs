@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(RedImpulse))]
+[RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(RedImpulse)), RequireComponent(typeof(SpriteRenderer))]
 public class Enemy : MonoBehaviour
 {
 	public RigidbodyMovement2D EnemyMovement { get; private set; }
@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
 	[SerializeField] private LayerMask _bulletLayer;
 	[SerializeField] private GameObject _expPrefab;
 	[SerializeField] private RedImpulse _redImpulse;
+	[SerializeField] private SpriteRenderer _spriteRenderer;
 	private float _cooldown;
 	private bool _readyToAttack;
 
@@ -19,6 +20,7 @@ public class Enemy : MonoBehaviour
 	{
 		Rb = GetComponent<Rigidbody2D>();
 		_redImpulse = GetComponent<RedImpulse>();
+		_spriteRenderer = GetComponent<SpriteRenderer>();
 	}
 
 	private void Awake()
@@ -85,6 +87,7 @@ public class Enemy : MonoBehaviour
 		Vector2 direction = (target.position - transform.position).normalized;
         var activityHandler = new ActivityHandler<MoveTypes>(_property.MoveType, this, _property, direction);
 		activityHandler.Execute();
+		Flip(direction);
     }
 
     public void MoveWithOffense(Transform target, Vector2 direction)
@@ -99,6 +102,8 @@ public class Enemy : MonoBehaviour
 		{
 			speed = _property.MaxSpeed;
 		}
+
+		Flip(direction);
 
 		EnemyMovement.Move(Rb, direction, speed);
     }
@@ -125,6 +130,18 @@ public class Enemy : MonoBehaviour
 		{
 			_cooldown -= Time.deltaTime;
 			_readyToAttack = false;
+		}
+	}
+
+	private void Flip(Vector2 direction)
+	{
+		if (direction.x < 0)
+		{
+			_spriteRenderer.flipX = false;
+		}
+		else if (direction.x > 0)
+		{
+			_spriteRenderer.flipX = true;
 		}
 	}
 }

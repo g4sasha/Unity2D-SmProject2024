@@ -8,6 +8,7 @@ public class LayerMove : MonoBehaviour
 	[SerializeField] private SpriteRenderer _spriteRenderer;
 	[SerializeField] private int _min = -100;
 	[SerializeField] private int _max = 100;
+	[SerializeField] private float _offset = -1.5f;
 
 	private void OnValidate()
 	{
@@ -31,7 +32,7 @@ public class LayerMove : MonoBehaviour
 			return;
 		}
 
-		if (transform.position.y > _target.position.y - 1.5f)
+		if (transform.position.y + _offset > _target.position.y - 1.5f)
 		{
 			_spriteRenderer.sortingOrder = _min;
 		}

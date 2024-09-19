@@ -507,6 +507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameOverPanel: {fileID: 1775294848182715348}
+  _inputListener: {fileID: 0}
 --- !u!1 &2144970272566084761
 GameObject:
   m_ObjectHideFlags: 0

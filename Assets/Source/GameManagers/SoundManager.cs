@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
 	public static SoundManager Instance { get; private set; }
-	[SerializeField] private List<AudioName> _sounds;
+	[SerializeField] private List<AudioClip> _sounds;
 	private AudioSource _audioSource;
 
 	private void OnValidate()
@@ -30,9 +30,9 @@ public class SoundManager : MonoBehaviour
     {
         foreach (var sound in _sounds)
 		{
-			if (sound.Name == name)
+			if (sound.name == name)
 			{
-				_audioSource.PlayOneShot(sound.Audio);
+				_audioSource.PlayOneShot(sound);
 				return;
 			}
 		}
