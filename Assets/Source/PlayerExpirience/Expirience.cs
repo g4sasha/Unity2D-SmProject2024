@@ -17,6 +17,7 @@ public class Expirience : MonoBehaviour
 	private void Start()
 	{
 		_target = EnemyNavigator.Instance.Player.transform;
+		Destroy(gameObject, 60f);
 	}
 
 	private void Update()
