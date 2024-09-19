@@ -207,7 +207,7 @@ PrefabInstance:
     - target: {fileID: 2100688105097988258, guid: 89b7475065e308c4594afc8a177e5316,
         type: 3}
       propertyPath: _scatter
-      value: 5
+      value: 1.58
       objectReference: {fileID: 0}
     - target: {fileID: 2100688105097988258, guid: 89b7475065e308c4594afc8a177e5316,
         type: 3}
@@ -395,7 +395,7 @@ PrefabInstance:
     - target: {fileID: 2100688105097988258, guid: 89b7475065e308c4594afc8a177e5316,
         type: 3}
       propertyPath: _scatter
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2100688105097988258, guid: 89b7475065e308c4594afc8a177e5316,
         type: 3}
@@ -800,7 +800,7 @@ PrefabInstance:
     - target: {fileID: 2100688105097988258, guid: 89b7475065e308c4594afc8a177e5316,
         type: 3}
       propertyPath: _scatter
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2100688105097988258, guid: 89b7475065e308c4594afc8a177e5316,
         type: 3}
@@ -811,7 +811,7 @@ PrefabInstance:
     - target: {fileID: 2100688105097988258, guid: 89b7475065e308c4594afc8a177e5316,
         type: 3}
       propertyPath: _spawnCooldown
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2100688105097988258, guid: 89b7475065e308c4594afc8a177e5316,
         type: 3}
@@ -905,7 +905,7 @@ PrefabInstance:
     - target: {fileID: 2100688105097988258, guid: 89b7475065e308c4594afc8a177e5316,
         type: 3}
       propertyPath: _scatter
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2100688105097988258, guid: 89b7475065e308c4594afc8a177e5316,
         type: 3}
@@ -1090,7 +1090,7 @@ PrefabInstance:
     - target: {fileID: 2100688105097988258, guid: 89b7475065e308c4594afc8a177e5316,
         type: 3}
       propertyPath: _scatter
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2100688105097988258, guid: 89b7475065e308c4594afc8a177e5316,
         type: 3}
@@ -1906,7 +1906,7 @@ PrefabInstance:
     - target: {fileID: 2100688105097988258, guid: 89b7475065e308c4594afc8a177e5316,
         type: 3}
       propertyPath: _spawnCooldown
-      value: 120
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2100688105097988258, guid: 89b7475065e308c4594afc8a177e5316,
         type: 3}
@@ -2559,6 +2559,31 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 123994355770021624, guid: 9202ebec274ecf94f95461eeb0adb539,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 123994355770021624, guid: 9202ebec274ecf94f95461eeb0adb539,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 123994355770021624, guid: 9202ebec274ecf94f95461eeb0adb539,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 123994355770021624, guid: 9202ebec274ecf94f95461eeb0adb539,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 123994355770021624, guid: 9202ebec274ecf94f95461eeb0adb539,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.73
+      objectReference: {fileID: 0}
     - target: {fileID: 1412388081405673746, guid: 9202ebec274ecf94f95461eeb0adb539,
         type: 3}
       propertyPath: m_Name
@@ -2624,6 +2649,12 @@ PrefabInstance:
       propertyPath: <Health>k__BackingField
       value: 
       objectReference: {fileID: 640245772}
+    - target: {fileID: 3779778350968834351, guid: 9202ebec274ecf94f95461eeb0adb539,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7af2b65d32229404aa55276f4f2a2ecc,
+        type: 3}
     - target: {fileID: 3922456077076753740, guid: 9202ebec274ecf94f95461eeb0adb539,
         type: 3}
       propertyPath: _vignette

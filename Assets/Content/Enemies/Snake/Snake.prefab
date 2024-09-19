@@ -39,7 +39,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 054bcbe9d6fe8b24296af08b161de0c7,
+      objectReference: {fileID: 21300000, guid: 0ffadda9eca167e42ba3501b4eca61ee,
         type: 3}
     - target: {fileID: 7843649705056222370, guid: 94b8b1c24b7243d46b7a9614c47a7164,
         type: 3}
@@ -64,27 +64,32 @@ PrefabInstance:
     - target: {fileID: 8107040617520190220, guid: 94b8b1c24b7243d46b7a9614c47a7164,
         type: 3}
       propertyPath: m_Radius
-      value: 4.5
+      value: 1.07
       objectReference: {fileID: 0}
     - target: {fileID: 9181025836003014552, guid: 94b8b1c24b7243d46b7a9614c47a7164,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.11111111
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9181025836003014552, guid: 94b8b1c24b7243d46b7a9614c47a7164,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.11111111
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9181025836003014552, guid: 94b8b1c24b7243d46b7a9614c47a7164,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 9181025836003014552, guid: 94b8b1c24b7243d46b7a9614c47a7164,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.76
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9181025836003014552, guid: 94b8b1c24b7243d46b7a9614c47a7164,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.46
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9181025836003014552, guid: 94b8b1c24b7243d46b7a9614c47a7164,
         type: 3}
@@ -125,6 +130,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9181025836003014552, guid: 94b8b1c24b7243d46b7a9614c47a7164,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
