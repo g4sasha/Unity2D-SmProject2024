@@ -1,4 +1,3 @@
-using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ namespace New
 		public UnitDamageable UnitDamageable { get; private set; }
 		public UnitAttack UnitAttack { get; private set; }
 		public UnitMovable UnitMovable { get; private set; }
-        [SerializeField] private Rigidbody2D _rigidbody;
+        [SerializeField] protected Rigidbody2D _rigidbody;
 
 		[Header("-ATTACK-"), Space]
 		[SerializeField] private int _attackDelayMs;
@@ -27,10 +26,12 @@ namespace New
 			UnitHealth.OnDeath += Die;
 		}
 
+        private void OnDestroy() => UnitHealth.OnDeath -= Die;
+
         private void Start()
         {
             Initialize();
-            _target = GameObject.Find("Player").GetComponent<PlayerUnit>();
+            _target = PlayerUnit.Instance;
         }
 
         private void FixedUpdate()
@@ -40,7 +41,7 @@ namespace New
 			Attack().Forget();
         }
 
-        private void Move()
+        protected virtual void Move()
         {
 			var direction = GetDirection();
 
@@ -60,7 +61,7 @@ namespace New
 			}
         }
 
-		private async UniTaskVoid Attack()
+		protected virtual async UniTaskVoid Attack()
         {
 			if (UnitAttack.CanAttack && !UnitAttack.IsAttacking)
 			{
@@ -81,7 +82,7 @@ namespace New
 			}
         }
 
-		private void Flip()
+		protected virtual void Flip()
 		{
 			var direction = GetDirection();
 
@@ -95,14 +96,9 @@ namespace New
 			}
 		}
 
-		private Vector2 GetDirection()
+		protected Vector2 GetDirection()
 		{
 			return (_target.transform.position - transform.position).normalized;
 		}
-
-        private void OnDestroy()
-        {
-            UnitHealth.OnDeath -= Die;
-        }
     }
 }

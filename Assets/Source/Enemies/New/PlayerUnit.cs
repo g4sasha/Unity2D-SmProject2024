@@ -2,8 +2,9 @@ using UnityEngine;
 
 namespace New
 {
-	public class PlayerUnit : Unit
+	public sealed class PlayerUnit : Unit
 	{
+		public static PlayerUnit Instance { get; private set; }
 		public UnitHealth UnitHealth { get; private set; }
 		public UnitDamageable UnitDamageable { get; private set; }
 		public UnitAttack UnitAttack { get; private set; }
@@ -15,6 +16,17 @@ namespace New
 
 		public void Initialize()
 		{
+			if (Instance)
+			{
+				Destroy(gameObject);
+				return;
+			}
+			else
+			{
+				Instance = this;
+				DontDestroyOnLoad(gameObject);
+			}
+
 			UnitHealth = new UnitHealth(this);
 			UnitDamageable = new UnitDamageable(UnitHealth);
 			UnitAttack = new UnitAttack(this);
