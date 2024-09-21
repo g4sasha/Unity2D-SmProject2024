@@ -6,6 +6,7 @@ namespace New
 	public class UnitHealth
 	{
 		public event Action<float> OnHealthChanged;
+		public event Action OnDeath;
 		public float MaxHealth { get; private set; }
 
 		public float Health
@@ -15,6 +16,11 @@ namespace New
 			{
 				_health = Mathf.Clamp(value, 0f, MaxHealth);
 				OnHealthChanged?.Invoke(_health);
+
+				if (_health == 0f)
+				{
+					OnDeath?.Invoke();
+				}
 			}
 		}
 

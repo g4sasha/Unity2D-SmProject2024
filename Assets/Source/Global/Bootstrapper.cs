@@ -10,7 +10,6 @@ namespace Global
 		private void Awake()
 		{
 			_playerUnit.Initialize();
-			_playerUnit.UnitHealth.Health = 50f;
 		}
 	}
 }
