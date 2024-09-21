@@ -1,5 +1,9 @@
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
+using System.Threading.Tasks;
+
+
 
 namespace New
 {
@@ -12,10 +16,10 @@ namespace New
         [SerializeField] protected Rigidbody2D _rigidbody;
 
 		[Header("-ATTACK-"), Space]
-		[SerializeField] private int _attackDelayMs;
-		[SerializeField] private float _attackSpeedCoef = 1f;
+		[SerializeField] protected float _attackDelay;
+		[SerializeField] protected float _attackDuration = 1f;
 
-		private PlayerUnit _target;
+		protected PlayerUnit _target;
 
         public void Initialize()
 		{
@@ -62,25 +66,20 @@ namespace New
         }
 
 		protected virtual async UniTaskVoid Attack()
-        {
+		{
+			var cansellationToken = gameObject.GetCancellationTokenOnDestroy();
+
 			if (UnitAttack.CanAttack && !UnitAttack.IsAttacking)
 			{
-				UnitAttack.Attack(_target.UnitDamageable, _attackDelayMs).Forget();
+				UnitAttack.Attack(_target.UnitDamageable, (int)(_attackDelay * 1000)).Forget();
 
 				Vector2 originalPosition = transform.position;
 				Vector2 targetPosition = _target.transform.position;
 
-				float percent = 0f;
-
-				while (percent < 1f)
-				{
-					percent += Time.deltaTime * _attackSpeedCoef;
-					float interpolation = (-Mathf.Pow(percent, 2) + percent) * 4f;
-					transform.position = Vector2.Lerp(originalPosition, targetPosition, interpolation);
-					await UniTask.Yield();
-				}
+				await transform.DOMove(targetPosition, _attackDuration).WithCancellation(cansellationToken);
+				await transform.DOMove(originalPosition, _attackDuration).WithCancellation(cansellationToken);
 			}
-        }
+		}
 
 		protected virtual void Flip()
 		{

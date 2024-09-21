@@ -24,7 +24,6 @@ namespace New
 			else
 			{
 				Instance = this;
-				DontDestroyOnLoad(gameObject);
 			}
 
 			UnitHealth = new UnitHealth(this);

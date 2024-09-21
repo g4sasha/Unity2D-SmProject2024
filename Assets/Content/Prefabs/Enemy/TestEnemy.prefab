@@ -100,8 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Config: {fileID: 11400000, guid: e05b349b1492c604f85c00d54d3a35d0, type: 2}
   _rigidbody: {fileID: 8131306985530907199}
-  _attackDelayMs: 2500
-  _attackSpeedCoef: 5
+  _attackDelay: 1
+  _attackDuration: 0.2
 --- !u!50 &8131306985530907199
 Rigidbody2D:
   serializedVersion: 4
