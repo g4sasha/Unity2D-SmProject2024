@@ -1,10 +1,14 @@
 using System;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace New
 {
 	public class UnitAttack
 	{
 		public event Action<float> OnDamageChanged;
+		public bool CanAttack { get; set; } = true;
+		public bool IsAttacking { get; private set; }
 
 		public float Damage
 		{
@@ -17,7 +21,6 @@ namespace New
 		}
 
 		private float _damage;
-
 		private Unit _unit;
 
 		public UnitAttack(Unit unit)
@@ -26,9 +29,17 @@ namespace New
 			Damage = _unit.Config.Damage;
 		}
 
-		public void Attack(UnitDamageable target)
+		public async UniTaskVoid Attack(UnitDamageable target, int attackDelayMs)
 		{
+			if (IsAttacking || !CanAttack)
+			{
+				return;
+			}
+
 			target.ApplyDamage(Damage);
+			IsAttacking = true;
+			await UniTask.Delay(attackDelayMs);
+			IsAttacking = false;
 		}
 	}
 }
