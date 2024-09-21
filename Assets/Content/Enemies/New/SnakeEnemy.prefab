@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7331422428199757838}
   - component: {fileID: 1875153158106247899}
-  - component: {fileID: 6169037017098894137}
   - component: {fileID: 8131306985530907199}
+  - component: {fileID: 5553798557267364024}
   m_Layer: 7
-  m_Name: TestEnemy
+  m_Name: SnakeEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,22 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6169037017098894137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7761210190967486535}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41559a5d04526214dbb1f14f1833535b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Config: {fileID: 11400000, guid: e05b349b1492c604f85c00d54d3a35d0, type: 2}
-  _rigidbody: {fileID: 8131306985530907199}
-  _attackDelay: 1
-  _attackDuration: 0.2
 --- !u!50 &8131306985530907199
 Rigidbody2D:
   serializedVersion: 4
@@ -129,3 +113,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &5553798557267364024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7761210190967486535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b153a45be0f55c4792b7eb6048fc30a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Config: {fileID: 11400000, guid: e05b349b1492c604f85c00d54d3a35d0, type: 2}
+  rigidbody: {fileID: 8131306985530907199}
+  attackDuration: 0.2
+  startWeapon: {fileID: 11400000, guid: 146fbb24bb0a6c442934fc589df5ce6b, type: 2}

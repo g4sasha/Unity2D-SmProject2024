@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5113158765c8544496f7bbfd563540e, type: 3}
-  m_Name: TestEnemy
+  m_Script: {fileID: 11500000, guid: 6fa9695976a1b4845aabf0e776891a90, type: 3}
+  m_Name: Knife
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: TestEnemy
-  <Health>k__BackingField: 100
+  <Name>k__BackingField: "\u041D\u043E\u0436"
   <Damage>k__BackingField: 10
-  <Speed>k__BackingField: 3
-  <Prefab>k__BackingField: {fileID: 6169037017098894137, guid: e5ef09d84c3afe7418a88746e770c26d,
-    type: 3}
+  <Cooldown>k__BackingField: 5
