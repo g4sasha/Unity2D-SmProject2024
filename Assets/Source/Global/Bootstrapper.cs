@@ -12,10 +12,5 @@ namespace Global
 			_playerUnit.Initialize();
 			_playerUnit.UnitHealth.Health = 50f;
 		}
-
-		private void Update()
-		{
-			_playerUnit.UnitMovable.Move(Vector2.up * _playerUnit.Config.Speed * Time.deltaTime);
-		}
 	}
 }
