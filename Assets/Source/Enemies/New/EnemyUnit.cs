@@ -20,8 +20,6 @@ namespace New
 		protected PlayerUnit _target { get; private set; }
 		protected Weapon _equippedWeapon;
 
-		private bool _isAttacking;
-
         public void Initialize()
 		{
 			UnitHealth = new UnitHealth(this);
@@ -59,7 +57,7 @@ namespace New
             }
 			else
 			{
-				Attack().Forget();
+				Attack();
 			}
         }
 
@@ -77,18 +75,16 @@ namespace New
 			}
 		}
 
-		protected virtual async UniTask Attack()
+		protected virtual void Attack()
 		{
-			if (_isAttacking)
+			if (_equippedWeapon.IsReloading)
 			{
 				return;
 			}
 			
 			var cansellationToken = gameObject.GetCancellationTokenOnDestroy();
 			AnimateAttack(cansellationToken).Forget();
-			_isAttacking = true;
-			await _equippedWeapon.Attack(_target.UnitDamageable);
-			_isAttacking = false;
+			_equippedWeapon.Attack(_target.UnitDamageable).Forget();
 		}
 
         protected async UniTaskVoid AnimateAttack(CancellationToken cansellationToken)
